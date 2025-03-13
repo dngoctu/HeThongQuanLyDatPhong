@@ -1,0 +1,192 @@
+services:
+  # MySQL cho User Service
+  mysql_user:
+    image: mysql:8.0  # Sử dụng phiên bản cụ thể của MySQL
+    container_name: ms_booking_travel_user_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: booking_travel_user_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "33061:3306"  # Cổng riêng cho MySQL User
+    volumes:
+      - mysql_user_data:/var/lib/mysql  # Volume riêng cho User Service
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  # MySQL cho Room Service
+  mysql_room:
+    image: mysql:8.0
+    container_name: ms_booking_travel_room_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: booking_travel_room_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3307:3306"  # Cổng riêng cho MySQL Room
+    volumes:
+      - mysql_room_data:/var/lib/mysql  # Volume riêng cho Room Service
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  # MySQL cho Booking Service
+  mysql_booking:
+    image: mysql:8.0
+    container_name: ms_booking_travel_booking_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: booking_travel_booking_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3308:3306"  # Cổng riêng cho MySQL Booking
+    volumes:
+      - mysql_booking_data:/var/lib/mysql  # Volume riêng cho Booking Service
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  # MySQL cho Notification Service
+  mysql_notification:
+    image: mysql:8.0
+    container_name: ms_booking_travel_notification_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: booking_travel_notification_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3309:3306"  # Cổng riêng cho MySQL Notification
+    volumes:
+      - mysql_notification_data:/var/lib/mysql  # Volume riêng cho Notification Service
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  # PostgreSQL cho Accommodation Service
+  postgres_accommodation:
+    image: postgres:15
+    container_name: ms_booking_travel_accommodation_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: booking_travel_accommodation_db
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # Cổng riêng cho PostgreSQL Accommodation
+    volumes:
+      - postgres_accommodation_data:/var/lib/postgresql/data  # Volume riêng
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+
+  # PostgreSQL cho Payment Service
+  postgres_payment:
+    image: postgres:15
+    container_name: ms_booking_travel_payment_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: booking_travel_payment_db
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Cổng riêng cho PostgreSQL Payment
+    volumes:
+      - postgres_payment_data:/var/lib/postgresql/data  # Volume riêng
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+
+  # PostgreSQL cho Address Service
+  postgres_address:
+    image: postgres:15
+    container_name: ms_booking_travel_address_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: booking_travel_address_db
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5434:5432"  # Cổng riêng cho PostgreSQL Address
+    volumes:
+      - postgres_address_data:/var/lib/postgresql/data  # Volume riêng
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+
+  # MailDev cho kiểm tra email
+  mail_dev:
+    image: maildev/maildev
+    container_name: ms_mail_dev
+    ports:
+      - "1080:1080"  # Cổng giao diện web MailDev
+      - "1025:1025"  # Cổng SMTP để gửi email
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  # (Tùy chọn) Dịch vụ ứng dụng (ví dụ: backend cho User Service)
+  # user_app:
+  #   build:
+  #     context: ./user-service
+  #     dockerfile: Dockerfile
+  #   container_name: ms_booking_travel_user_app
+  #   environment:
+  #     - MYSQL_HOST=mysql_user
+  #     - MYSQL_USER=admin
+  #     - MYSQL_PASSWORD=123456
+  #     - MYSQL_DB=booking_travel_user_db
+  #   ports:
+  #     - "8081:8080"
+  #   depends_on:
+  #     - mysql_user
+  #   networks:
+  #     - app_network
+  #   restart: unless-stopped
+
+# Định nghĩa volumes
+volumes:
+  mysql_user_data:
+  mysql_room_data:
+  mysql_booking_data:
+  mysql_notification_data:
+  postgres_accommodation_data:
+  postgres_payment_data:
+  postgres_address_data:
+
+# Định nghĩa mạng
+networks:
+  app_network:
+    driver: bridge
