@@ -1,4 +1,4 @@
-package com.dnt.user;
+package com.dnt.roombooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

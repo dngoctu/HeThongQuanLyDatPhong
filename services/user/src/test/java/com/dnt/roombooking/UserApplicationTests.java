@@ -1,4 +1,4 @@
-package com.dnt.user;
+package com.dnt.roombooking;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
