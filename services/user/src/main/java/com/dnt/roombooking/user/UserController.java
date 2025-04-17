@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(
+    public ResponseEntity<UserResponse> createUser(
             @RequestBody @Valid UserRequest userRequest
             )
     {
@@ -43,19 +43,19 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateUser(
+    public ResponseEntity<UserResponse> updateUser(
             @RequestBody @Valid UserRequest userRequest
     )
     {
-        userService.updateUser(userRequest);
-        return ResponseEntity.accepted().build();
+        var user = userService.updateUser(userRequest);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping ("/{user-id}")
-    public ResponseEntity<Void> deleteUser(
+    public ResponseEntity<String> deleteUser(
             @PathVariable("user-id") Integer userId
     ) {
         userService.deleteUser(userId);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok("Xóa user thành công");
     }
 }

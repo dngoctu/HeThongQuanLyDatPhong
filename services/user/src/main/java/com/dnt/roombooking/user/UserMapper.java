@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserMapper {
-    public User toUserRequest(UserRequest userRequest) {
+    public User toUser(UserRequest userRequest) {
         if(userRequest == null) return null;
 
         return User.builder()

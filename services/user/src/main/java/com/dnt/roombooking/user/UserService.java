@@ -29,18 +29,18 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(String.format("Không tìm thấy người dùng %s", userId)));
     }
 
-    public String createUser(UserRequest userRequest) {
-        var customer = userRepository.save(userMapper.toUserRequest(userRequest));
-        return customer.getId().toString();
+    public UserResponse createUser(UserRequest userRequest) {
+        var user = userRepository.save(userMapper.toUser(userRequest));
+        return userMapper.toUserResponse(user);
     }
 
-    public void updateUser(UserRequest userRequest) {
+    public UserResponse updateUser(UserRequest userRequest) {
         var user = userRepository.findById(userRequest.id())
                 .orElseThrow(() -> new UserNotFoundException(
                         String.format("Không tìm thấy người dùng %s", userRequest.id())
                 ));
         mergeUser(user, userRequest);
-        userRepository.save(user);
+        return userMapper.toUserResponse(user);
     }
 
     private void mergeUser(User user, UserRequest userRequest) {
@@ -61,6 +61,10 @@ public class UserService {
     }
 
     public void deleteUser(Integer userId) {
-        userRepository.deleteById(userId);
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(
+                        String.format("Không tìm thấy người dùng %s", userId)
+                ));
+        userRepository.delete(user);
     }
 }

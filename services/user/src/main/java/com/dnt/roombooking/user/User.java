@@ -1,5 +1,9 @@
 package com.dnt.roombooking.user;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @AllArgsConstructor
@@ -7,8 +11,10 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
+@Entity
 public class User {
 
+    @Id
     private Integer id;
     private String firstName;
     private String lastName;
@@ -22,19 +28,21 @@ public class User {
 
     // Enum cho Role
     public enum Role {
-        manager, admin
+        partner,  // Đối tác
+        admin, // Quản trị viên
+        customer // Khách hàng
     }
 
     // Constructors
-    public User() {
-    }
-
-    public User(String firstName, String lastName, String email, String password, Role role, String description) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.description = description;
-    }
+//    public User() {
+//    }
+//
+//    public User(String firstName, String lastName, String email, String password, Role role, String description) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.password = password;
+//        this.role = role;
+//        this.description = description;
+//    }
 }
