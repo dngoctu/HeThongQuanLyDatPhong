@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dnt</groupId>
-	<artifactId>Address</artifactId>
+	<artifactId>roombooking</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Address</name>
-	<description>Address services</description>
+	<description>Address microservices of roombooking project</description>
 	<url/>
 	<licenses>
 		<license/>
