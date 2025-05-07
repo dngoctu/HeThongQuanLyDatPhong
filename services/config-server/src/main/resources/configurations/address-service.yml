@@ -1,15 +1,25 @@
-server:
-  port: 8082
 spring:
   datasource:
-    url: jdbc:postgresql://postgres_address:5432/booking_travel_address_db
+    url: jdbc:postgresql://localhost:5435/booking_travel_address_db
     username: postgres
     password: 123456
     driver-class-name: org.postgresql.Driver
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    baseline-description: 'init'
+    baseline-version: 0
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+server:
+  port: 8082
+
+#logging:
+#  level:
+#    org.hibernate: DEBUG
