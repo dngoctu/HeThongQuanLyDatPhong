@@ -2,7 +2,7 @@ services:
   # MySQL cho User Service
   mysql_user:
     image: mysql:8.0  # Sử dụng phiên bản cụ thể của MySQL
-    container_name: ms_booking_travel_user_db
+    container_name: ms_booking_travel_user
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_user_db
@@ -23,7 +23,7 @@ services:
   # MySQL cho Room Service
   mysql_room:
     image: mysql:8.0
-    container_name: ms_booking_travel_room_db
+    container_name: ms_booking_travel_room
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_room_db
@@ -44,7 +44,7 @@ services:
   # MySQL cho Booking Service
   mysql_booking:
     image: mysql:8.0
-    container_name: ms_booking_travel_booking_db
+    container_name: ms_booking_travel_booking
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_booking_db
@@ -65,7 +65,7 @@ services:
   # MySQL cho Notification Service
   mysql_notification:
     image: mysql:8.0
-    container_name: ms_booking_travel_notification_db
+    container_name: ms_booking_travel_notification
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_notification_db
@@ -86,7 +86,7 @@ services:
   # PostgreSQL cho Accommodation Service
   postgres_accommodation:
     image: postgres:15
-    container_name: ms_booking_travel_accommodation_db
+    container_name: ms_booking_travel_accommodation
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
@@ -107,7 +107,7 @@ services:
   # PostgreSQL cho Payment Service
   postgres_payment:
     image: postgres:15
-    container_name: ms_booking_travel_payment_db
+    container_name: ms_booking_travel_payment
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
@@ -128,7 +128,7 @@ services:
   # PostgreSQL cho Address Service
   postgres_address:
     image: postgres:9
-    container_name: ms_booking_travel_address_db
+    container_name: ms_booking_travel_address
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
