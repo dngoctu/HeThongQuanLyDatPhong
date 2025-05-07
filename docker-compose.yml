@@ -6,8 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_user_db
-      MYSQL_USER: root
-#      MYSQL_USER: admin
+#      MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     ports:
       - "33061:3306"  # Cổng riêng cho MySQL User
@@ -28,7 +27,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_room_db
-      MYSQL_USER: admin
+#      MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     ports:
       - "33062:3306"  # Cổng riêng cho MySQL Room
@@ -49,7 +48,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_booking_db
-      MYSQL_USER: admin
+#      MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     ports:
       - "33063:3306"  # Cổng riêng cho MySQL Booking
@@ -70,7 +69,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: booking_travel_notification_db
-      MYSQL_USER: admin
+#      MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     ports:
       - "33064:3306"  # Cổng riêng cho MySQL Notification
@@ -128,13 +127,13 @@ services:
 
   # PostgreSQL cho Address Service
   postgres_address:
-    image: postgres:15
+    image: postgres:9
     container_name: ms_booking_travel_address_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: booking_travel_address_db
-      PGDATA: /var/lib/postgresql/data
+      PGDATA: ./postgres
     ports:
       - "5435:5432"  # Cổng riêng cho PostgreSQL Address
     volumes:

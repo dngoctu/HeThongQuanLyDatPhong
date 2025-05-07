@@ -1,9 +1,6 @@
 package com.dnt.roombooking.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -15,6 +12,7 @@ import lombok.*;
 public class User {
 
     @Id
+    @GeneratedValue
     private Integer id;
     private String firstName;
     private String lastName;
@@ -25,6 +23,7 @@ public class User {
     private Role role;
 
     private String description;
+    private Integer addressId;
 
     // Enum cho Role
     public enum Role {

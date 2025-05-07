@@ -13,6 +13,7 @@ public class UserMapper {
                 .email(userRequest.email())
                 .role(userRequest.role())
                 .description(userRequest.description())
+                .addressId(userRequest.addressId())
                 .build();
     }
 
@@ -23,6 +24,7 @@ public class UserMapper {
                 user.getLastName(),
                 user.getEmail(),
                 user.getDescription(),
-                user.getRole());
+                user.getRole(),
+                user.getAddressId());
     }
 }
