@@ -13,6 +13,13 @@ public class AddressController {
 
     private final AddressService addressService;
 
+    @GetMapping("{address-id}")
+    public ResponseEntity<AddressResponse> findAddressById(
+            @PathVariable("address-id") Integer addressId
+    ) {
+        return ResponseEntity.ok(addressService.findAddressById(addressId));
+    }
+
     @GetMapping
     public ResponseEntity<List<AddressResponse>> findAllAddress() {
         return ResponseEntity.ok(addressService.findAllAddress());

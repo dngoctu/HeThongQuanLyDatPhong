@@ -13,6 +13,11 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
 
+    public AddressResponse findAddressById(Integer addressId) {
+        return addressRepository.findById(addressId).map(addressMapper::toAddressResponse)
+                .orElseThrow(() -> new AddressNotFoundException(String.format("Không tìm thấy địa chỉ %s", addressId)));
+    }
+
     public List<AddressResponse> findAllAddress() {
         return addressRepository.findAll().stream().map(addressMapper::toAddressResponse).toList();
     }
