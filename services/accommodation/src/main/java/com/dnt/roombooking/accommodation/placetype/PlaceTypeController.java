@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/placetype")
+@RequestMapping("api/v1/accommodation/placetype")
 @RequiredArgsConstructor
 public class PlaceTypeController {
     private final PlaceTypeService placeTypeService;
