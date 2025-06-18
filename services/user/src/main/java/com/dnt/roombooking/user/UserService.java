@@ -37,7 +37,7 @@ public class UserService {
     public UserResponse updateUser(UserRequest userRequest) {
         var user = userRepository.findById(userRequest.id())
                 .orElseThrow(() -> new UserNotFoundException(
-                        String.format("Không tìm thấy người dùng %s", userRequest.id())
+                        String.format("Không tìm thấy người dùng %s %s", userRequest.firstName(), userRequest.lastName())
                 ));
         mergeUser(user, userRequest);
         return userMapper.toUserResponse(user);

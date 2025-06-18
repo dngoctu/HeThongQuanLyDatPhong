@@ -1,5 +1,7 @@
 package com.dnt.roombooking.user;
 
+import com.dnt.roombooking.address.AddressResponse;
+
 public record UserResponse (
         Integer id,
         String firstName,
@@ -7,6 +9,6 @@ public record UserResponse (
         String email,
         String description,
         User.Role role,
-        Integer addressId
+        AddressResponse address
 ){
 }
