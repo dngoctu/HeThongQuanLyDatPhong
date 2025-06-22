@@ -23,6 +23,13 @@ public class PlaceTypeService {
         return placeTypeRepository.findAll().stream().map(placeTypeMapper::toPlaceTypeResponse).toList();
     }
 
+    public PlaceTypeResponse findPlaceTypeById(Integer placeTypeId) {
+        PlaceType placeType = placeTypeRepository.findById(placeTypeId)
+                .orElseThrow(() -> new PlaceTypeNotFoundException(
+                        String.format("Không tìm thấy loại phòng %s", placeTypeId)));
+        return placeTypeMapper.toPlaceTypeResponse(placeType);
+    }
+
     public PlaceTypeResponse createPlaceType(PlaceTypeRequest placeTypeRequest) {
         PlaceType placeType = placeTypeRepository.save(placeTypeMapper.toPlaceType(placeTypeRequest));
         return placeTypeMapper.toPlaceTypeResponse(placeType);

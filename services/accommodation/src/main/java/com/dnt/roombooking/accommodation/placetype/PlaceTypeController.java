@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/accommodation/placetype")
 @RequiredArgsConstructor
@@ -12,12 +14,18 @@ public class PlaceTypeController {
     private final PlaceTypeService placeTypeService;
 
     @GetMapping
-    public ResponseEntity<?> getPlaceTypes(@RequestParam(required = false) String name) {
-        if (name != null && !name.isEmpty()) {
-            return ResponseEntity.ok(placeTypeService.findPlaceTypeByName(name));
-        } else {
-            return ResponseEntity.ok(placeTypeService.findAllPlaceType());
-        }
+    public ResponseEntity<List<PlaceTypeResponse>> getPlaceTypes() {
+        return ResponseEntity.ok(placeTypeService.findAllPlaceType());
+    }
+
+    @GetMapping("{placetype-name}")
+    public ResponseEntity<PlaceTypeResponse> getPlaceTypeByName(@PathVariable String placetypeName) {
+        return ResponseEntity.ok(placeTypeService.findPlaceTypeByName(placetypeName));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<PlaceTypeResponse> getPlaceTypeById(@PathVariable Integer id) {
+        return ResponseEntity.ok(placeTypeService.findPlaceTypeById(id));
     }
 
     @PostMapping
